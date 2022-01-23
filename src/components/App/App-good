@@ -1,0 +1,113 @@
+/*
+The purpose of the <negocio /> component is to represent how a negocio (a restaurant) in Ravenous will be formatted and styled.
+*/
+import React from "react";
+import './App.css'; //  ./ means in this directory
+import BusinessList from '../BusinessList/BusinessList';//Import the <Business /> Component
+import SearchBar from '../SearchBar/SearchBar';
+import Yelp from '../../util/Yelp';
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      negocios: []
+    };
+    /*etapa 2*/
+ this.searchYelp = this.searchYelp.bind(this);
+  }
+
+searchYelp(){
+    // donde voy a utilizar esta funccion? pasarla al componente donde voy a utilizarla
+    Yelp.search("pizza", "boston", "best_match").then( negocios => {
+      console.log(this.state.negocios);
+      console.log(negocios);
+      this.setState({negocios: negocios});
+    });
+    //return Yelp.search("pizza", "boston", "best_match");
+// it should not return the businesses object?
+  }
+
+  render() {
+    //console.log(this.state.negocios);//console.log dentro de render
+    return (
+      <div className="App">
+      <h1>ravenous</h1>
+      <SearchBar searchYelp={this.searchYelp} />
+      <BusinessList negocios={this.state.negocios}/>
+      </div>
+    );
+  }
+}
+
+//////////////////////////////////////
+/*En App.js*********************************************/
+
+/*ETAPA 3 :
+
+1-EN SEARCHBAR.JS********************************************
+1.0. necesitamos
+ a)una nueva funcion
+ b)y dos variables que van a cambiar: term y location.
+hacer el constructor. teniendo en cuenta esto.Tenemos contenido dinamico entonces---pensar lo q es dinamico para hacer el state: term y location
+class SearchBar extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      term:"",
+      location:""
+    };
+
+    this.handleSearch = this.handleSearch.bind(this);
+  }
+1.1.
+a)Hacer FUNCTION2(handleSearch) que
+va a llamar a la funcion1 con sus argumentos reales searchYelp(term, location, "best_match")
+recogidos de los 2 inputstext del cliente
+handleSearch(){
+  this.props.searchYelp(this.state.term, this.state.location, "best_match");
+}
+b)attach bind(this) en constructor. Cada vez que utilizamos una funcion en una clase hay que hacer esto
+c) onClick el btn search va a llamar esta funcion (CLAVE)
+<a onClick={this.handleSearch}>Lets Go</a>
+AHORA NECESITAMOS PONER AL DIA LOS VALORES this.state.term Y this.state.location CADE VEZ QUE EL CLIENTE ENTRA TEXTO
+
+1.2.
+a)in constructor ya tenemos el state valor default de "term" y de "location"
+b)INTRO
+objetivo: onChange input--> cambiar state de term y location(valor que viene del input del cliente)
+crear una funcion que haga el setState({term:newTerm}) para cada termino. Y pasar el valor del input del cliente con
+----const newTerm:event.target.value;----
+La funcion se llama en los inputs para poder recuperar el valor.
+Este typo de funcion se suele llamar handleClick, handleChange, handleTerm...
+b.1)PRIMERO HACEMOS handleTerm*******
+crear eventHandle en el input para llamar a la funtion
+<input onChange={this.handleTerm} placeholder="Search Businesses" />
+
+b.2) crear la funcione  handleTerm que recoge el input del cliente (event.target.value)---> y cambia el valor de
+this.state = {
+  term:"",
+  location:""
+};
+En esta funcion utilizar el setState({term:newTerm}) que tiene que estar siempre en el mismo archivo de donde se ha definido state.
+handleTerm(event){
+  const newTerm= event.target.value;
+  this.setState({term:newTerm})
+}
+b.2.1) attach bind(this) de esta funcion en constructor. Cada vez que utilizamos una funcion en una clase hay que hacer esto
+this.handleTerm = this.handleTerm.bind(this);
+b.3) hacer una prueba con console.log(newTerm) y metiendo texto en the input browser;
+
+b.4) repetir los mismos pasos para handleLocation
+UNA VEZ QUE STATE DE TERM Y LOCATION SE PONEN AL DIA (cada vez que el input change-es decir que el cliento introduce texto)CON EL TEXTO Q HA INTRODUCIDO EL CLIENTE EN LOS INPUTS, LA FUNCION handleSearch puede recoger estos valores como argumentos.
+Recordar handleSearch se llama cuando se hace click en el boton Search
+
+b.5) comprobar cuales son los valores. Hacer un console.log para comprobar si funciona
+handleLocation(event){
+  const newLocation= event.target.value;
+  this.setState({location:newLocation});
+  console.log(this.state.location);
+}
+*/
+
+export default App;
+//Ana@Dell MINGW64 /f/projects

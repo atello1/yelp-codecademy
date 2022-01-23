@@ -1,0 +1,62 @@
+@font-face {
+  font-family: 'Garamond';
+  src: local("Garamond"), url("./fonts/garamont/GARA.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Garamond';
+  src: local("GARAIT"), url("./fonts/garamont/GARAIT.TTF") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Garamond';
+  src: local("GARABD"), url("./fonts/garamont/GARABD.TTF") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+html{background-color:#cccccc0f}
+.SearchBar {
+    position: relative;
+    overflow: hidden;
+    min-height: 100% !important;
+background:yellow;
+/*
+background:   linear-gradient(
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.4)
+    ),url(images/header2.jpg) ;
+background-size:cover;
+}
+*/
+background: url(images/header2.jpg) ;
+background-size:cover;
+background:   linear-gradient(
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.4)
+    ),url(images/header3.jpg) ;
+background-size:cover;
+}
+
+.header-top {
+  height: 80px;
+    width: 100%;
+    background: #000 url(images/react-logo1.png) no-repeat 40px 50px;
+    background-size: 102px;
+    background-position: center center;
+}
+.header-title{      font-family: "Garamond", serif;
+    text-align: center;
+    padding: 20px;
+    color: #b9b8b8;
+/*background: url(images/price2-2.png) no-repeat top center;
+    padding-top: 129px;*/}
+h1 {
+        font-weight: 400;
+        font-size: 90px;
+        margin-bottom: 15px;
+    }
+.intro3{font-style:italic;padding:20px}
